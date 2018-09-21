@@ -11,7 +11,7 @@ long getMicrotime(){
 }
 
 double getRandomNumber(){
-	return srand(getMicrotime());
+	 srand(getMicrotime());
 }
 
 int main(int argc, char *argv[]){
