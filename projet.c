@@ -14,13 +14,25 @@ double getRandomNumber(){
 	 srand(getMicrotime());
 }
 
+char timeFormat(){
+	int randomNumber = rand() %20000+30000; 
+	int minutes = (randomNumber % 60000);
+	randomNumber -= minutes*60000;
+	int secondes = (randomNumber % 1000);
+	randomNumber -= secondes*1000;
+	int millisecondes = randomNumber; 
+	char minutesChar[10];
+	char secondesChar[10];
+	char millisecondesChar[10];
+	sprintf(minutesChar,"%d",minutes);
+	sprintf(secondesChar,"%d",secondes);
+	sprintf(millisecondesChar,"%d",millisecondes);
+	char str[30] =  minutesChar + " : " + secondesChar + " : " + millisecondesChar;
+	return str; 
+}
 int main(int argc, char *argv[]){
-//	int r = rand() % 20; // nbr random entre 0 et 19
-//	r += 30; // nbr random entre 30 et 49
 	getRandomNumber();
-	printf("Le nombre randoM est %d\n",rand() %100);
-	printf("Le nombre randoM est %d\n",rand() %100);
-	printf("Le nombre randoM est %d\n",rand() %100);
+	printf("Le nombre randoM est %d\n",rand() %20000+30000);
 	return 0;
 }
 
