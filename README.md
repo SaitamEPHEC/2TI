@@ -1,2 +1,1 @@
-# 2TI
-Nicky est une petite salope
+Nicky tu pues ses grands morts
