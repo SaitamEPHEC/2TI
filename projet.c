@@ -10,29 +10,37 @@ long getMicrotime(){
 	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
 }
 
-double getRandomNumber(){
+double getRandomSeed(){
 	 srand(getMicrotime());
 }
 
-char timeFormat(){
+char* timeFormat(){
 	int randomNumber = rand() %20000+30000; 
-	int minutes = (randomNumber % 60000);
+	int minutes = randomNumber % 60000;
+	//printf("MINUTES : %d", minutes);
 	randomNumber -= minutes*60000;
-	int secondes = (randomNumber % 1000);
+	int secondes = randomNumber % 1000;
+	
 	randomNumber -= secondes*1000;
 	int millisecondes = randomNumber; 
-	char minutesChar[10];
+	char minutesChar[30];
 	char secondesChar[10];
 	char millisecondesChar[10];
-	sprintf(minutesChar,"%d",minutes);
-	sprintf(secondesChar,"%d",secondes);
-	sprintf(millisecondesChar,"%d",millisecondes);
-	char str[30] =  minutesChar + " : " + secondesChar + " : " + millisecondesChar;
-	return str; 
+	sprintf(minutesChar,"%d : ",minutes);
+	//printf("MINUTES : %s",minutesChar);
+	sprintf(secondesChar,"%d : ",secondes);
+	//printf("SECONDES : %s",secondesChar);
+	sprintf(millisecondesChar,"%d : ",millisecondes);
+	//printf("MILLISECONDES : %s",millisecondesChar);
+	strcat(minutesChar,secondesChar);
+	strcat(minutesChar,millisecondesChar);  
+	printf("AFFICHER : %s",minutesChar);
+	return minutesChar; 
 }
+
 int main(int argc, char *argv[]){
-	getRandomNumber();
-	printf("Le nombre randoM est %d\n",rand() %20000+30000);
+	getRandomSeed();
+	printf("Le temps de la voiture est de : %s\n", timeFormat());
 	return 0;
 }
 
