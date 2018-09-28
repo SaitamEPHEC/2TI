@@ -14,33 +14,33 @@ double getRandomSeed(){
 	 srand(getMicrotime());
 }
 
-char* timeFormat(){
-	int randomNumber = rand() %20000+30000; 
-	int minutes = randomNumber % 60000;
-	//printf("MINUTES : %d", minutes);
+char *timeFormat(){
+	int randomNumber = rand() %20000+30000;
+	//Récupère les minutes du nombre en arrondissant vers le bas
+	int minutes = randomNumber/60000;
 	randomNumber -= minutes*60000;
-	int secondes = randomNumber % 1000;
-	
+	//Récupère les secondes du nombre en arrondissant vers le bas
+	int secondes = randomNumber / 1000;
 	randomNumber -= secondes*1000;
+	//Récupère les millisecondes du nombre
 	int millisecondes = randomNumber; 
-	char minutesChar[30];
+	static char minutesChar[30];
 	char secondesChar[10];
 	char millisecondesChar[10];
 	sprintf(minutesChar,"%d : ",minutes);
 	//printf("MINUTES : %s",minutesChar);
 	sprintf(secondesChar,"%d : ",secondes);
 	//printf("SECONDES : %s",secondesChar);
-	sprintf(millisecondesChar,"%d : ",millisecondes);
+	sprintf(millisecondesChar,"%d",millisecondes);
 	//printf("MILLISECONDES : %s",millisecondesChar);
 	strcat(minutesChar,secondesChar);
 	strcat(minutesChar,millisecondesChar);  
-	printf("AFFICHER : %s",minutesChar);
+	//printf("AFFICHER : %s\n",minutesChar);
 	return minutesChar; 
 }
-
 int main(int argc, char *argv[]){
 	getRandomSeed();
-	printf("Le temps de la voiture est de : %s\n", timeFormat());
+	printf("Le temps de la voiture est  %s\n", timeFormat());
 	return 0;
 }
 
