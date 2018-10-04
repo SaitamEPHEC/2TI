@@ -28,18 +28,42 @@ char *timeFormat(){
 	char secondesChar[10];
 	char millisecondesChar[10];
 	sprintf(minutesChar,"%d : ",minutes);
-	//printf("MINUTES : %s",minutesChar);
 	sprintf(secondesChar,"%d : ",secondes);
-	//printf("SECONDES : %s",secondesChar);
 	sprintf(millisecondesChar,"%d",millisecondes);
-	//printf("MILLISECONDES : %s",millisecondesChar);
 	strcat(minutesChar,secondesChar);
-	strcat(minutesChar,millisecondesChar);  
-	//printf("AFFICHER : %s\n",minutesChar);
+	strcat(minutesChar,millisecondesChar);
 	return minutesChar; 
 }
+
 int main(int argc, char *argv[]){
 	getRandomSeed();
+	pid_t voiture; 
+	voiture = fork();
+
+	void child_process(void){
+		//Renvoie 15 fois (15 tours) 3 temps (3 secteurs) : Total 45 temps
+	}
+
+	void father_process(int child_pid){
+		//Recevoir les infos des processus fils (voitures) et les stocker
+	}
+
+	switch(voiture){
+	//Si erreur lors du fork
+	case -1;
+	perror("Erreur de fork");
+	return  EXIT_FAILURE;
+	break;
+	//Si on est dans le fils
+	case 0;
+	child_process();
+	break;
+	//Si on est dans le père
+	default;
+	father_process(pid);
+	break;
+	}
+
 	printf("Le temps de la voiture est  %s\n", timeFormat());
 	return 0;
 }
