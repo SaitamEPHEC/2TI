@@ -4,23 +4,40 @@
 #include <string.h>
 #include <sys/time.h>
 #include <limits.h>
+#include <sys/types.h>
+#include <sys/ipc.h> 
+#include <sys/shm.h>
 #include "libproj.h"
-
-struct Voiture {
-	int numero;
-	long best_s1;
-	long best_s2;
-	long best_s3;
- 	long best_tour;
-	long total_tour;
-};
-
 
 
 int main(int argc, char *argv[]){
+	int tabNum [20] = {44, 77, 5, 7, 3, 33, 11, 31, 18, 35, 27, 55, 10, 28, 8, 20, 2, 14, 9, 16};
 	getRandomSeed();
 	pid_t v1; 
 	v1 = fork();
+	voiture* mesVoitures;
+	voiture uneVoiture;
+
+	for(int i=0; i<20, i++){
+		mesVoitures[i].numero = tabNum[i];
+	}
+
+	//mémoire partagée éééééééééééééééééééééééééé
+
+	//crée le segment 
+	int schmid = shmget(KEY_SHM, 24*sizeof(uneVoiture), SHM_FLAG); // valeur retournee de shmget, si -1 erreur lors du partage de memoire
+	
+    	//test si erreur shmget
+   	 if (shmid < 0) {
+     	   perror("Erreur shmget");
+     	   exit(1);
+   	 }
+
+   	 //on attache le segment à l'espace de donnée
+   	 if (mesVoitures = shmat(shmid, NULL, 0) == (void *) -1) {
+		perror("Erreur shmat");
+		exit(1);
+  	 }
 
 	void child_process(void){
 		struct Voiture Voiture;

@@ -6,9 +6,19 @@
 #include <limits.h>
 
 
-//#define int KEy_SHM = 69;
+#define KEY_SHM 69; /* clé à passer a shmget */ 
+// #define SHM_SIZE 20*sizeof(Voiture); /* taille de la mémoire partagée */  
+#define SHM_FLAG 0666; /* le flag à passer à shmget */ 
+#define NBR_VOITURE 20;
 
-
+struct Voiture {
+	int numero;
+	long best_s1;
+	long best_s2;
+	long best_s3;
+ 	long best_tour;
+	long total_tour;
+};
 
 long getMicrotime(){
 	struct timeval currentTime;
