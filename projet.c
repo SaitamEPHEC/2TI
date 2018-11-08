@@ -22,10 +22,10 @@ int main(int argc, char *argv[]){
 		mesVoitures[i].numero = tabNum[i];
 	}
 
-	//mémoire partagée éééééééééééééééééééééééééé
+	//mémoire partagée
 
 	//crée le segment 
-	int schmid = shmget(KEY_SHM, 24*sizeof(uneVoiture), SHM_FLAG); // valeur retournee de shmget, si -1 erreur lors du partage de memoire
+	int schmid = shmget(KEY_SHM, 20*sizeof(uneVoiture), SHM_FLAG); // valeur retournee de shmget, si -1 erreur lors du partage de memoire
 	
     	//test si erreur shmget
    	 if (shmid < 0) {
@@ -38,6 +38,15 @@ int main(int argc, char *argv[]){
 		perror("Erreur shmat");
 		exit(1);
   	 }
+
+	for(int i=0;i<=20;i++){
+		if((pid = fork()) == 0){
+			child_process();		
+		}
+		if(pid != 0){
+			father_process();
+		}	
+	}
 
 	void child_process(void){
 		struct Voiture Voiture;
@@ -112,7 +121,7 @@ int main(int argc, char *argv[]){
 		//Recevoir les infos des processus fils (voitures) et les stocker
 	}
 
-	switch(v1){
+/*	switch(v1){
 	//Si erreur lors du fork
 	case -1:
 	perror("Erreur de fork");
@@ -127,7 +136,7 @@ int main(int argc, char *argv[]){
 	father_process(v1);
 	break;
 	}
-
+*/
 	return 0;
 }
 
