@@ -4,12 +4,10 @@
 #include <string.h>
 #include <sys/time.h>
 #include <limits.h>
-
-
-#define KEY_SHM 69; /* clé à passer a shmget */ 
+#define KEY_SHM 69 /* clé à passer a shmget */ 
 // #define SHM_SIZE 20*sizeof(Voiture); /* taille de la mémoire partagée */  
-#define SHM_FLAG 0666; /* le flag à passer à shmget */ 
-#define NBR_VOITURE 20;
+#define SHM_FLAG 0666 /* le flag à passer à shmget */ 
+#define NBR_VOITURE 20
 
 struct Voiture {
 	int numero;
